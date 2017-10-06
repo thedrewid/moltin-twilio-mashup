@@ -1,22 +1,25 @@
 const sms = require('./sms.js');
 const express = require('express');
+var bodyParser = require('body-parser');
 
-const app = express()
-port = process.env.EXPRESS_PORT
+const app = express();
+port = process.env.EXPRESS_PORT;
 
-//Get the webhoo
+app.use(bodyParser.json()); // for parsing application/json
+app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
+
+//Get the webhook
 app.post('/', (req, res) => {
-  // Tell moltin we have recieved the POST
+  // Tell webhook we have recieved the POST
   res.send('200');
   // Log the request
-  console.log(req);
+  console.log(req.body);
 
-  // Extract relevant data
-
+  var body = JSON.stringify(req.body);
   // Send to phone number via the Twilio API
-  sms.createSMS("This is where an order would go")
+  sms.createSMS(body);
 })
 
 // Listen
 app.listen(port);
-console.log("Listening on: " + port)
+console.log("Listening on: " + port);

@@ -11,7 +11,8 @@ module.exports.createSMS = (body) => {
   client.messages.create({
       to: process.env.PHONE_NUMBER,
       from: process.env.TWILIO_PHONE_NUMBER,
-      body: body,
+      body: body
     })
     .then((message) => console.log(message.sid));
 }
+
