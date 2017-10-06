@@ -14,6 +14,7 @@ app.post('/', (req, res) => {
   // Extract relevant data
 
   // Send to phone number via the Twilio API
+  sms.createSMS("This is where an order would go")
 })
 
 // Listen
